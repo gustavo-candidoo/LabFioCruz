@@ -1,7 +1,16 @@
 from flask import Flask, request, jsonify
 from models.db import professores 
+from models.projeto import listarProjetos, obterProjeto
 
 app = Flask(__name__)
+
+@app.route('/projetos', methods=['GET'] )
+def listar_projetos():
+    return jsonify(listarProjetos())
+
+@app.route('/projetos/<int:id>', methods=['GET'] )
+def obter_projeto(id):
+    return jsonify(obterProjeto(id))
 
 @app.route('/professores', methods=['GET'] )
 def obter_prof():
